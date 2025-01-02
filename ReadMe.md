@@ -56,6 +56,8 @@ print(string.format("Retrieved value for account-wide setting: %d", value))
 Here's a practical example using player events:
 ```lua
 local AccountSettings = require("AccountSettings")
+local PLAYER_EVENT_ON_FIRST_LOGIN = 30
+local PLAYER_EVENT_ON_COMMAND = 42
 
 -- Initialize default settings on first login
 local function OnFirstLogin(event, player)
@@ -76,8 +78,8 @@ local function OnPlayerCommand(event, player, command)
     end
 end
 
-RegisterPlayerEvent(PlayerEvents.PLAYER_EVENT_ON_FIRST_LOGIN, OnFirstLogin)
-RegisterPlayerEvent(PlayerEvents.PLAYER_EVENT_ON_COMMAND, OnPlayerCommand)
+RegisterPlayerEvent(PLAYER_EVENT_ON_FIRST_LOGIN, OnFirstLogin)
+RegisterPlayerEvent(PLAYER_EVENT_ON_COMMAND, OnPlayerCommand)
 ```
 
 ## Scripts Included
