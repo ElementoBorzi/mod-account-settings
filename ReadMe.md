@@ -62,8 +62,8 @@ local PLAYER_EVENT_ON_COMMAND = 42
 -- Initialize default settings on first login
 local function OnFirstLogin(event, player)
     local accountId = player:GetAccountId()
+    AccountSettings.Set(accountId, "default_preferences", 0, 1)
     AccountSettings.Set(accountId, "default_preferences", 1, 1)
-    AccountSettings.Set(accountId, "default_preferences", 2, 1)
     print(string.format("Initialized account-wide settings for Account ID: %d", accountId))
 end
 
