@@ -56,12 +56,14 @@ print(string.format("Retrieved value for account-wide setting: %d", value))
 Here's a practical example using player events:
 ```lua
 local AccountSettings = require("AccountSettings")
+local PLAYER_EVENT_ON_FIRST_LOGIN = 30
+local PLAYER_EVENT_ON_COMMAND = 42
 
 -- Initialize default settings on first login
 local function OnFirstLogin(event, player)
     local accountId = player:GetAccountId()
+    AccountSettings.Set(accountId, "default_preferences", 0, 1)
     AccountSettings.Set(accountId, "default_preferences", 1, 1)
-    AccountSettings.Set(accountId, "default_preferences", 2, 1)
     print(string.format("Initialized account-wide settings for Account ID: %d", accountId))
 end
 
@@ -76,8 +78,8 @@ local function OnPlayerCommand(event, player, command)
     end
 end
 
-Global:RegisterPlayerEvent(PlayerEvents.PLAYER_EVENT_ON_FIRST_LOGIN, OnFirstLogin)
-Global:RegisterPlayerEvent(PlayerEvents.PLAYER_EVENT_ON_COMMAND, OnPlayerCommand)
+RegisterPlayerEvent(PLAYER_EVENT_ON_FIRST_LOGIN, OnFirstLogin)
+RegisterPlayerEvent(PLAYER_EVENT_ON_COMMAND, OnPlayerCommand)
 ```
 
 ## Scripts Included
@@ -94,16 +96,16 @@ Global:RegisterPlayerEvent(PlayerEvents.PLAYER_EVENT_ON_COMMAND, OnPlayerCommand
 ## API Reference
 Methods
 AccountSettings.Set(accountId, source, index, value)
-- **accountId (number): The unique ID of the account.
-- **source (string): The source or feature name for the setting.
-- **index (number): The index of the value in the settings array.
-- **value (number): The value to set.
+- **accountId (number)**: The unique ID of the account.
+- **source (string)**: The source or feature name for the setting.
+- **index (number)**: The index of the value in the settings array.
+- **value (number)**: The value to set.
 
 AccountSettings.Get(accountId, source, index)
-- **accountId (number): The unique ID of the account.
-- **source (string): The source or feature name for the setting.
-- **index (number): The index of the value in the settings array.
-- **Returns (number|nil): The value at the specified index or nil if not found.
+- **accountId (number)**: The unique ID of the account.
+- **source (string)**: The source or feature name for the setting.
+- **index (number)**: The index of the value in the settings array.
+- **Returns (number|nil)**: The value at the specified index or nil if not found.
 
 ## Contributing
 Pull requests are welcome! For significant changes, please open an issue to discuss your ideas first. If you encounter any bugs or have feature requests, feel free to open an issue.
